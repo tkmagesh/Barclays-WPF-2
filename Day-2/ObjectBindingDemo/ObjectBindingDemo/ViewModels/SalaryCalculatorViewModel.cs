@@ -15,11 +15,16 @@ namespace ObjectBindingDemo.ViewModels
         private bool _isSalaryCalculatable;
         private SalaryCalculator calculator;
         private ICommand _calculateSalaryCommand;
+        private double _gross;
+        private ICommand _calculateGross;
 
         public SalaryCalculatorViewModel()
         {
             calculator = new SalaryCalculator();
-            _calculateSalaryCommand = new CalculateSalaryCommand(this);
+            /*_calculateSalaryCommand = new CalculateSalaryCommand(this);
+            _calculateGross = new CalculateGrossCommand(this);*/
+            _calculateSalaryCommand = new MyCommand(o => this.Calculate(), o=> true);
+            _calculateGross = new MyCommand(o => this.CalculateGrossSalary(), o => true);
         }
         public double Basic
         {
@@ -110,6 +115,74 @@ namespace ObjectBindingDemo.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void CalculateGrossSalary()
+        {
+            Gross = Basic + Hra + Da;
+        }
+
+        public double Gross
+        {
+            get { return _gross; }
+            set
+            {
+                _gross = value;
+                TriggerPropertyChanged("Gross");
+            }
+        }
+
+        public ICommand CalculateGross
+        {
+            get { return _calculateGross; }
+            set { _calculateGross = value; }
+        }
+    }
+
+    public class MyCommand : ICommand
+    {
+        private readonly Action<object> _execute;
+        private readonly Func<object, bool> _canExecute;
+
+        public MyCommand(Action<object> execute, Func<object,bool> canExecute )
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute(parameter);
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute(parameter);
+        }
+
+        public event EventHandler CanExecuteChanged;
+    }
+
+    /*public class CalculateGrossCommand : ICommand
+    {
+        private readonly SalaryCalculatorViewModel _viewModel;
+
+        public CalculateGrossCommand(SalaryCalculatorViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public void Execute(object parameter)
+        {
+           _viewModel.CalculateGrossSalary();
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+
+        public event EventHandler CanExecuteChanged;
     }
 
     public class CalculateSalaryCommand : ICommand
@@ -132,5 +205,5 @@ namespace ObjectBindingDemo.ViewModels
         }
 
         public event EventHandler CanExecuteChanged;
-    }
+    }*/
 }

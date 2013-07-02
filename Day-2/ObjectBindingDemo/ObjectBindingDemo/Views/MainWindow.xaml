@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -42,9 +43,11 @@
                 Name="SliderTax" Minimum="10" Maximum="50" SmallChange="1" LargeChange="5"></Slider>
             <TextBlock HorizontalAlignment="Center" Text="{Binding ElementName=SliderTax, Path=Value, StringFormat=#}"></TextBlock>
         </StackPanel>
+        <Button Grid.Row="4" Content="Calculate Gross" Command="{Binding CalculateGross}"></Button>
+        <TextBlock Text="{Binding Path=Gross}" Grid.Row="4" Grid.Column="1"></TextBlock>
         <Button Content="Calculate" 
                 IsEnabled="{Binding Path=IsSalaryCalculatable}"
-                Grid.Row="4" Grid.Column="1" Command="{Binding CalculateSalary}"></Button>
+                Grid.Row="5" Grid.Column="1" Command="{Binding CalculateSalary}"></Button>
         <TextBlock 
             Text="{Binding Path=Salary}"
             Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"></TextBlock>
