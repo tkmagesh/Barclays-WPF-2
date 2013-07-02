@@ -1,11 +1,11 @@
-﻿<Window x:Class="ObjectBindingDemo.MainWindow"
+﻿<Window x:Class="ObjectBindingDemo.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:ObjectBindingDemo"
+        xmlns:local="clr-namespace:ObjectBindingDemo" xmlns:viewModels="clr-namespace:ObjectBindingDemo.ViewModels"
         FontSize="22"
         Title="Salary Calculator" Height="350" Width="525">
     <Window.Resources>
-        <local:SalaryCalculator x:Key="calculator"></local:SalaryCalculator>
+        <viewModels:SalaryCalculatorViewModel x:Key="calculator"></viewModels:SalaryCalculatorViewModel>
     </Window.Resources>
     <Window.DataContext>
         <StaticResource ResourceKey="calculator"></StaticResource>
@@ -42,7 +42,9 @@
                 Name="SliderTax" Minimum="10" Maximum="50" SmallChange="1" LargeChange="5"></Slider>
             <TextBlock HorizontalAlignment="Center" Text="{Binding ElementName=SliderTax, Path=Value, StringFormat=#}"></TextBlock>
         </StackPanel>
-        <Button Content="Calculate" Grid.Row="4" Grid.Column="1" Click="ButtonBase_OnClick"></Button>
+        <Button Content="Calculate" 
+                IsEnabled="{Binding Path=IsSalaryCalculatable}"
+                Grid.Row="4" Grid.Column="1" Command="{Binding CalculateSalary}"></Button>
         <TextBlock 
             Text="{Binding Path=Salary}"
             Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"></TextBlock>
