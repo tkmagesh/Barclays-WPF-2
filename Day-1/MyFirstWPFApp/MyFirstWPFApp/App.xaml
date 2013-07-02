@@ -1,0 +1,8 @@
+﻿<z:Application x:Class="MyFirstWPFApp.App"
+             xmlns:z="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="ColorPicker.xaml">
+    <z:Application.Resources>
+         
+    </z:Application.Resources>
+</z:Application>

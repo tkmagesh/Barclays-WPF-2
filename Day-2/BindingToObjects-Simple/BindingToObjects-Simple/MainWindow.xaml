@@ -1,0 +1,24 @@
+﻿<Window x:Class="BindingToObjects_Simple.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:bindingToObjectsSimple="clr-namespace:BindingToObjects_Simple"
+        FontSize="22"
+        Title="MainWindow" Height="350" Width="525">
+    
+    <StackPanel Name="LayoutRoot">
+        <StackPanel.Resources>
+            <bindingToObjectsSimple:Employee FirstName="Suresh" LastName="Kannan" x:Key="emp"></bindingToObjectsSimple:Employee>
+        </StackPanel.Resources>
+        <StackPanel Name="StackDataEntry">
+            <StackPanel.DataContext>
+                <StaticResource ResourceKey="emp"></StaticResource>
+                <!--<bindingToObjectsSimple:Employee FirstName="Magesh" LastName="Kuppan"></bindingToObjectsSimple:Employee>-->
+            </StackPanel.DataContext>
+            <TextBox Name="TxtFirstName" Text="{Binding Path=FirstName}"></TextBox>
+            <TextBox Name="TxtLastName" Text="{Binding Path=LastName}"></TextBox>
+        </StackPanel>
+        <Button Content="Bind Data" Name="BtnBindData" Click="BtnBindData_OnClick"></Button>
+        <Button Content="Print Object State" Name="BtnPrintObjectState" Click="BtnPrintObjectState_OnClick"></Button>
+        <Button Content="Change Object State" Name="BtnChangeObjectState" Click="BtnChangeObjectState_OnClick"></Button>
+    </StackPanel>
+</Window>

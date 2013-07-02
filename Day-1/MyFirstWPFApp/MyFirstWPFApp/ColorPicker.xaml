@@ -1,0 +1,25 @@
+﻿<Window x:Class="MyFirstWPFApp.ColorPicker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MyFirstWPFApp"
+        Title="ColorPicker" Height="300" Width="300">
+    <StackPanel>
+        <Slider Name="AlphaSlider" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10"></Slider>
+        <Slider Name="RedSlider" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Background="Red"></Slider>
+        <Slider Name="GreenSlider" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Background="Green"></Slider>
+        <Slider Name="BlueSlider" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Background="Blue"></Slider>
+        <Border Width="223" Height="160" Margin="10">
+            <Border.Background>
+                <MultiBinding>
+                    <MultiBinding.Converter>
+                        <local:SliderValuesToColorConverter></local:SliderValuesToColorConverter>
+                    </MultiBinding.Converter>
+                    <Binding ElementName="AlphaSlider" Path="Value"></Binding>
+                    <Binding ElementName="RedSlider" Path="Value"></Binding>
+                    <Binding ElementName="GreenSlider" Path="Value"></Binding>
+                    <Binding ElementName="BlueSlider" Path="Value"></Binding>
+                </MultiBinding>
+            </Border.Background>
+        </Border>
+    </StackPanel>
+</Window>
