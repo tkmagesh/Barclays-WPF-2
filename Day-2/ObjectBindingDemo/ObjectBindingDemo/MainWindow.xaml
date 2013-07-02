@@ -1,0 +1,50 @@
+﻿<Window x:Class="ObjectBindingDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ObjectBindingDemo"
+        FontSize="22"
+        Title="Salary Calculator" Height="350" Width="525">
+    <Window.Resources>
+        <local:SalaryCalculator x:Key="calculator"></local:SalaryCalculator>
+    </Window.Resources>
+    <Window.DataContext>
+        <StaticResource ResourceKey="calculator"></StaticResource>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Content="_Basic :" Grid.Row="0" HorizontalAlignment="Right" Target="{Binding ElementName=TxtBasic}"></Label>
+        <TextBox Name="TxtBasic"
+                 Text="{Binding Path=Basic}"
+                 Grid.Row="0" Grid.Column="1"></TextBox>
+        <Label Content="_Hra :" Grid.Row="1" HorizontalAlignment="Right" Target="{Binding ElementName=TxtHra}"></Label>
+        <TextBox Name="TxtHra" 
+                 Text="{Binding Path=Hra}"
+                 Grid.Row="1" Grid.Column="1"></TextBox>
+        <Label Content="_DA :" Grid.Row="2" HorizontalAlignment="Right" Target="{Binding ElementName=TxtDa}"></Label>
+        <TextBox Name="TxtDa" 
+                 Text="{Binding Path=Da}"
+                 Grid.Row="2" Grid.Column="1"></TextBox>
+        <Label Content="_Tax :" Grid.Row="3" HorizontalAlignment="Right" Target="{Binding ElementName=SliderTax}"></Label>
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <Slider 
+                Value="{Binding Path=Tax}"
+                Name="SliderTax" Minimum="10" Maximum="50" SmallChange="1" LargeChange="5"></Slider>
+            <TextBlock HorizontalAlignment="Center" Text="{Binding ElementName=SliderTax, Path=Value, StringFormat=#}"></TextBlock>
+        </StackPanel>
+        <Button Content="Calculate" Grid.Row="4" Grid.Column="1" Click="ButtonBase_OnClick"></Button>
+        <TextBlock 
+            Text="{Binding Path=Salary}"
+            Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"></TextBlock>
+    </Grid>
+</Window>
