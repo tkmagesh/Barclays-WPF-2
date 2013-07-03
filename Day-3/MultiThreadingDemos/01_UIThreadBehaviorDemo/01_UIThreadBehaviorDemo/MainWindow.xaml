@@ -1,0 +1,10 @@
+﻿<Window x:Class="_01_UIThreadBehaviorDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        FontSize="22"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Do Work" Height="46" HorizontalAlignment="Left" Margin="12,29,0,0" Name="BtnDoWork" VerticalAlignment="Top" Width="156" Click="BtnDoWork_Click" />
+        <TextBlock Height="55" HorizontalAlignment="Left" Margin="12,119,0,0" Name="TBStatus" Text="" VerticalAlignment="Top" Width="470" />
+    </Grid>
+</Window>
