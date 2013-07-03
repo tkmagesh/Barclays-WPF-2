@@ -1,0 +1,11 @@
+﻿<Window x:Class="DependencyPropertyDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DependencyPropertyDemo"
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel>
+        <TextBox Name="TxtDummy"></TextBox>
+        <local:DataEntryField x:Name="DEFEmpId" Caption="Employee Id" Value="{Binding ElementName=TxtDummy, Path=Text}"></local:DataEntryField>
+        <Button Name="BtnDisplayId" Content="Display Employee Id" Click="BtnDisplayId_OnClick"></Button>
+    </StackPanel>
+</Window>
